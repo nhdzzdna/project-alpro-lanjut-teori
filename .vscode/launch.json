@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/kiki/Documents/project-alpro-lanjut-teori/project-alpro-lanjut-teori",
+      "program": "/Users/kiki/Documents/project-alpro-lanjut-teori/project-alpro-lanjut-teori/build/Debug/outDebug"
+    }
+  ]
+}
