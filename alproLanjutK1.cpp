@@ -1,18 +1,23 @@
 #include <iostream>
 using namespace std;
 
+struct id{
+    string huruf;
+    int angka;
+};
+
 struct barang{
     string nama;
-    float harga;
     int stok;
+    struct id idBarang;
 }; barang Barang[1000];
 
 int menu, jumlahBarang=0, menuPerbarui, urutanBarang, AscDesc;
 char kembali;
 void MENU(), tambahBarang(), tampilkanBarang(barang Barang[], int jumlahBarang), cariBarang(), hapusBarang(), kosong();
-void menuPerbaruiBarang(), perbaruiBarang(), perbaruiHarga(), menuTampilkanBarang(), swapBarang(barang &a, barang &b);
+void menuPerbaruiBarang(), perbaruiBarang(), menuTampilkanBarang(), swapBarang(barang &a, barang &b);
 void menuAscDesc(), ascNama(barang Barang[], int jumlahBarang), descNama(barang Barang[], int jumlahBarang);
-void ascHarga(barang Barang[], int jumlahBarang), descHarga(barang Barang[], int jumlahBarang);
+void ascID(barang Barang[], int jumlahBarang), descID(barang Barang[], int jumlahBarang);
 void ascStok(barang Barang[], int jumlahBarang), descStok(barang Barang[], int jumlahBarang);
 
 int main(){
@@ -47,8 +52,6 @@ void MENU(){
     cout << "| 3. Perbarui Data Barang  |\n";
     cout << "| 4. Cari Barang           |\n";
     cout << "| 5. Hapus Data Barang     |\n";
-    cout << "| 6. Data Penjualan        |\n";
-    cout << "| 7. Laporan Keuangan      |\n";
     cout << "============================\n";    
     cout << "Pilih menu : "; cin >> menu;      
 }
@@ -60,11 +63,19 @@ void tambahBarang(){
     cout << "===================================\n";
     cout << "Nama Barang : ";
     cin >> Barang[jumlahBarang].nama;
-    cout << "Harga : ";
-    cin >> Barang[jumlahBarang].harga;
     cout << "Stok : ";
-    cin >> Barang[jumlahBarang].stok;   
+    cin >> Barang[jumlahBarang].stok;  
+    
+    if(jumlahBarang<9){
+        Barang[jumlahBarang].idBarang.huruf = "A0";
+        Barang[jumlahBarang].idBarang.angka = jumlahBarang+1;
+    }else{
+        Barang[jumlahBarang].idBarang.huruf = "A";
+        Barang[jumlahBarang].idBarang.angka = jumlahBarang+1;        
+    }    
+
     jumlahBarang = jumlahBarang+1; 
+    cout << "Id   : " << Barang[jumlahBarang-1].idBarang.huruf << Barang[jumlahBarang-1].idBarang.angka << endl;
 }
 
 void menuTampilkanBarang(){
@@ -73,7 +84,7 @@ void menuTampilkanBarang(){
     cout << "|   Urutkan Berdasarkan:   |\n";
     cout << "============================\n";
     cout << "| 1. Nama                  |\n";
-    cout << "| 2. Harga                 |\n";
+    cout << "| 2. ID                 |\n";
     cout << "| 3. Stok                  |\n";
     cout << "============================\n";  
     cout << "Pilih menu : "; cin >> urutanBarang;
@@ -94,10 +105,6 @@ void menuAscDesc(){
         ascNama(Barang, jumlahBarang);
     }else if(urutanBarang==1 && AscDesc==2){
         descNama(Barang, jumlahBarang);
-    }else if(urutanBarang==2 && AscDesc==1){
-        ascHarga(Barang, jumlahBarang);
-    }else if(urutanBarang==2 && AscDesc==2){
-        descHarga(Barang, jumlahBarang);
     }else if(urutanBarang==3 && AscDesc==1){
         ascStok(Barang, jumlahBarang);
     }else if(urutanBarang==3 && AscDesc==2){
@@ -131,10 +138,10 @@ void descNama(barang Barang[], int jumlahBarang){
     tampilkanBarang(Barang, jumlahBarang);
 }
 
-void ascHarga(barang Barang[], int jumlahBarang){
+void ascID(barang Barang[], int jumlahBarang){
     for (int i=0; i<jumlahBarang-1;i++){
         for (int j=0; j<jumlahBarang-1-i; j++){
-            if (Barang[j].harga>Barang[j+1].harga){
+            if (Barang[j].idBarang.angka>Barang[j+1].idBarang.angka){
                 swapBarang(Barang[j], Barang[j+1]);
             }
         }
@@ -142,10 +149,10 @@ void ascHarga(barang Barang[], int jumlahBarang){
     tampilkanBarang(Barang, jumlahBarang);
 }
 
-void descHarga(barang Barang[], int jumlahBarang){
+void descID(barang Barang[], int jumlahBarang){
     for(int i=0; i<jumlahBarang-1; i++){
         for(int j=0; j<jumlahBarang-1-i; j++){
-            if(Barang[j].harga<Barang[j+1].harga){
+            if(Barang[j].idBarang.angka<Barang[j+1].idBarang.angka){
                 swapBarang(Barang[j], Barang[j+1]);
             }
         }
@@ -182,8 +189,8 @@ void tampilkanBarang(barang Barang[], int jumlahBarang){
     cout << "====================================\n";
     for(int j=0; j<jumlahBarang; j++){
         cout << "Nama Barang : " << Barang[j].nama << endl;
-        cout << "Harga       : " << Barang[j].harga << endl;
         cout << "Stok        : " << Barang[j].stok << endl;
+        cout << "Id          : " << Barang[j].idBarang.huruf << Barang[j].idBarang.angka << endl;      
         cout << "------------------------------------" << endl;
     }
 }
@@ -214,8 +221,8 @@ void cariBarang(){
     if(ada){
         system("cls");
         cout << "Nama Barang : " << Barang[index].nama << endl;
-        cout << "Harga       : " << Barang[index].harga << endl;
         cout << "Stok        : " << Barang[index].stok << endl;
+        cout << "Id          : " << Barang[index].idBarang.huruf << Barang[index].idBarang.angka << endl;  
     }else{
         cout << "============================================\n";
         cout << "----------Barang tidak ditemukan!-----------\n";}  
@@ -226,35 +233,9 @@ void menuPerbaruiBarang(){
     cout << "====================================\n";
     cout << "| Pilih Data yang Ingin Diperbarui |\n";
     cout << "====================================\n";
-    cout << "| 1. Harga                         |\n";
-    cout << "| 2. Stok                          |\n";
+    cout << "| 1. Stok                          |\n";
     cout << "====================================\n";   
     cout << "Pilih menu : "; cin >> menuPerbarui;    
-}
-
-void perbaruiHarga(){
-    system("cls");
-    string namaBarang;
-    int j, index;
-    bool ada = false;
-    cout << "Nama barang         : ";
-    cin >> namaBarang;
-    for(j=0; j<jumlahBarang; j++){
-        if(namaBarang == Barang[j].nama){
-            ada = true;
-            index = j;
-        }
-    }
-    if(ada){
-        float hargaBaru;
-        cout << "Masukkan harga baru : ";
-        cin >> hargaBaru;
-        Barang[index].harga = hargaBaru;
-        cout << "============================================\n";
-        cout << "---------Harga berhasil diperbarui!---------\n";
-    }else{
-        cout << "============================================\n";
-        cout << "----------Barang tidak ditemukan!-----------\n";}   
 }
 
 void perbaruiStok(){
@@ -285,8 +266,7 @@ void perbaruiStok(){
 void perbaruiBarang(){
     menuPerbaruiBarang();
     switch(menuPerbarui){
-        case 1  : perbaruiHarga(); break;
-        case 2  : perbaruiStok();  break;        
+        case 1  : perbaruiStok();  break;        
         default : system("cls");
             cout << "==================\n";
             cout << "| Menu tidak ada |\n";
