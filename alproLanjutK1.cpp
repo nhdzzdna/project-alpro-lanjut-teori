@@ -1,21 +1,21 @@
 #include <iostream>
 using namespace std;
 
-struct produk
+struct barang
 {
     string nama;
     float harga;
     int stok;
 };
-produk Produk[1000]; // KARIN MAU COBA COMMIT
+barang Barang[1000]; // KARIN MAU COBA COMMIT
 
-int menu, jumlahProduk = 0, menuPerbarui, urutanProduk, AscDesc;
+int menu, jumlahBarang = 0, menuPerbarui, urutanBarang, AscDesc;
 char kembali;
-void MENU(), tambahProduk(), tampilkanProduk(produk Produk[], int jumlahProduk), cariProduk(), hapusProduk(), kosong();
-void menuPerbaruiProduk(), perbaruiProduk(), perbaruiHarga(), menuTampilkanProduk(), swapProduk(produk &a, produk &b);
-void menuAscDesc(), ascNama(produk Produk[], int jumlahProduk), descNama(produk Produk[], int jumlahProduk);
-void ascHarga(produk Produk[], int jumlahProduk), descHarga(produk Produk[], int jumlahProduk);
-void ascStok(produk Produk[], int jumlahProduk), descStok(produk Produk[], int jumlahProduk);
+void MENU(), tambahBarang(), tampilkanBarang(barang Barang[], int jumlahBarang), cariBarang(), hapusBarang(), kosong();
+void menuPerbaruiBarang(), perbaruiBarang(), perbaruiHarga(), menuTampilkanBarang(), swapBarang(barang &a, barang &b);
+void menuAscDesc(), ascNama(barang Barang[], int jumlahBarang), descNama(barang Barang[], int jumlahBarang);
+void ascHarga(barang Barang[], int jumlahBarang), descHarga(barang Barang[], int jumlahBarang);
+void ascStok(barang Barang[], int jumlahBarang), descStok(barang Barang[], int jumlahBarang);
 
 int main()
 {
@@ -25,12 +25,12 @@ int main()
         switch (menu)
         {
         case 1:
-            tambahProduk();
+            tambahBarang();
             break;
         case 2:
-            if (jumlahProduk > 0)
+            if (jumlahBarang > 0)
             {
-                menuTampilkanProduk();
+                menuTampilkanBarang();
             }
             else
             {
@@ -38,9 +38,9 @@ int main()
             }
             break;
         case 3:
-            if (jumlahProduk > 0)
+            if (jumlahBarang > 0)
             {
-                perbaruiProduk();
+                perbaruiBarang();
             }
             else
             {
@@ -48,9 +48,9 @@ int main()
             }
             break;
         case 4:
-            if (jumlahProduk > 0)
+            if (jumlahBarang > 0)
             {
-                cariProduk();
+                cariBarang();
             }
             else
             {
@@ -58,9 +58,9 @@ int main()
             }
             break;
         case 5:
-            if (jumlahProduk > 0)
+            if (jumlahBarang > 0)
             {
-                hapusProduk();
+                hapusBarang();
             }
             else
             {
@@ -85,11 +85,11 @@ void MENU()
     cout << "============================\n";
     cout << "|           MENU           |\n";
     cout << "============================\n";
-    cout << "| 1. Tambah Produk         |\n";
-    cout << "| 2. Tampilkan Produk      |\n";
-    cout << "| 3. Perbarui Data Produk  |\n";
-    cout << "| 4. Cari Produk           |\n";
-    cout << "| 5. Hapus Data Produk     |\n";
+    cout << "| 1. Tambah Barang         |\n";
+    cout << "| 2. Tampilkan Barang      |\n";
+    cout << "| 3. Perbarui Data Barang  |\n";
+    cout << "| 4. Cari Barang           |\n";
+    cout << "| 5. Hapus Data Barang     |\n";
     cout << "| 6. Data Penjualan        |\n";
     cout << "| 7. Laporan Keuangan      |\n";
     cout << "============================\n";
@@ -97,22 +97,22 @@ void MENU()
     cin >> menu;
 }
 
-void tambahProduk()
+void tambahBarang()
 {
     system("cls");
     cout << "===================================\n";
-    cout << "|          Tambah Produk          |\n";
+    cout << "|          Tambah Barang          |\n";
     cout << "===================================\n";
-    cout << "Nama Produk : ";
-    cin >> Produk[jumlahProduk].nama;
+    cout << "Nama Barang : ";
+    cin >> Barang[jumlahBarang].nama;
     cout << "Harga : ";
-    cin >> Produk[jumlahProduk].harga;
+    cin >> Barang[jumlahBarang].harga;
     cout << "Stok : ";
-    cin >> Produk[jumlahProduk].stok;
-    jumlahProduk = jumlahProduk + 1;
+    cin >> Barang[jumlahBarang].stok;
+    jumlahBarang = jumlahBarang + 1;
 }
 
-void menuTampilkanProduk()
+void menuTampilkanBarang()
 {
     system("cls");
     cout << "============================\n";
@@ -123,7 +123,7 @@ void menuTampilkanProduk()
     cout << "| 3. Stok                  |\n";
     cout << "============================\n";
     cout << "Pilih menu : ";
-    cin >> urutanProduk;
+    cin >> urutanBarang;
     menuAscDesc();
 }
 
@@ -139,29 +139,29 @@ void menuAscDesc()
     cout << "Pilih menu : ";
     cin >> AscDesc;
 
-    if (urutanProduk == 1 && AscDesc == 1)
+    if (urutanBarang == 1 && AscDesc == 1)
     {
-        ascNama(Produk, jumlahProduk);
+        ascNama(Barang, jumlahBarang);
     }
-    else if (urutanProduk == 1 && AscDesc == 2)
+    else if (urutanBarang == 1 && AscDesc == 2)
     {
-        descNama(Produk, jumlahProduk);
+        descNama(Barang, jumlahBarang);
     }
-    else if (urutanProduk == 2 && AscDesc == 1)
+    else if (urutanBarang == 2 && AscDesc == 1)
     {
-        ascHarga(Produk, jumlahProduk);
+        ascHarga(Barang, jumlahBarang);
     }
-    else if (urutanProduk == 2 && AscDesc == 2)
+    else if (urutanBarang == 2 && AscDesc == 2)
     {
-        descHarga(Produk, jumlahProduk);
+        descHarga(Barang, jumlahBarang);
     }
-    else if (urutanProduk == 3 && AscDesc == 1)
+    else if (urutanBarang == 3 && AscDesc == 1)
     {
-        ascStok(Produk, jumlahProduk);
+        ascStok(Barang, jumlahBarang);
     }
-    else if (urutanProduk == 3 && AscDesc == 2)
+    else if (urutanBarang == 3 && AscDesc == 2)
     {
-        descStok(Produk, jumlahProduk);
+        descStok(Barang, jumlahBarang);
     }
     else
     {
@@ -171,131 +171,131 @@ void menuAscDesc()
     }
 }
 
-void ascNama(produk Produk[], int jumlahProduk)
+void ascNama(barang Barang[], int jumlahBarang)
 {
-    for (int i = 0; i < jumlahProduk - 1; i++)
+    for (int i = 0; i < jumlahBarang - 1; i++)
     {
-        for (int j = 0; j < jumlahProduk - 1 - i; j++)
+        for (int j = 0; j < jumlahBarang - 1 - i; j++)
         {
-            if (Produk[j].nama > Produk[j + 1].nama)
+            if (Barang[j].nama > Barang[j + 1].nama)
             {
-                swapProduk(Produk[j], Produk[j + 1]);
+                swapBarang(Barang[j], Barang[j + 1]);
             }
         }
     }
-    tampilkanProduk(Produk, jumlahProduk);
+    tampilkanBarang(Barang, jumlahBarang);
 }
 
-void descNama(produk Produk[], int jumlahProduk)
+void descNama(barang Barang[], int jumlahBarang)
 {
-    for (int i = 0; i < jumlahProduk - 1; i++)
+    for (int i = 0; i < jumlahBarang - 1; i++)
     {
-        for (int j = 0; j < jumlahProduk - 1 - i; j++)
+        for (int j = 0; j < jumlahBarang - 1 - i; j++)
         {
-            if (Produk[j].nama < Produk[j + 1].nama)
+            if (Barang[j].nama < Barang[j + 1].nama)
             {
-                swapProduk(Produk[j], Produk[j + 1]);
+                swapBarang(Barang[j], Barang[j + 1]);
             }
         }
     }
-    tampilkanProduk(Produk, jumlahProduk);
+    tampilkanBarang(Barang, jumlahBarang);
 }
 
-void ascHarga(produk Produk[], int jumlahProduk)
+void ascHarga(barang Barang[], int jumlahBarang)
 {
-    for (int i = 0; i < jumlahProduk - 1; i++)
+    for (int i = 0; i < jumlahBarang - 1; i++)
     {
-        for (int j = 0; j < jumlahProduk - 1 - i; j++)
+        for (int j = 0; j < jumlahBarang - 1 - i; j++)
         {
-            if (Produk[j].harga > Produk[j + 1].harga)
+            if (Barang[j].harga > Barang[j + 1].harga)
             {
-                swapProduk(Produk[j], Produk[j + 1]);
+                swapBarang(Barang[j], Barang[j + 1]);
             }
         }
     }
-    tampilkanProduk(Produk, jumlahProduk);
+    tampilkanBarang(Barang, jumlahBarang);
 }
 
-void descHarga(produk Produk[], int jumlahProduk)
+void descHarga(barang Barang[], int jumlahBarang)
 {
-    for (int i = 0; i < jumlahProduk - 1; i++)
+    for (int i = 0; i < jumlahBarang - 1; i++)
     {
-        for (int j = 0; j < jumlahProduk - 1 - i; j++)
+        for (int j = 0; j < jumlahBarang - 1 - i; j++)
         {
-            if (Produk[j].harga < Produk[j + 1].harga)
+            if (Barang[j].harga < Barang[j + 1].harga)
             {
-                swapProduk(Produk[j], Produk[j + 1]);
+                swapBarang(Barang[j], Barang[j + 1]);
             }
         }
     }
-    tampilkanProduk(Produk, jumlahProduk);
+    tampilkanBarang(Barang, jumlahBarang);
 }
 
-void ascStok(produk Produk[], int jumlahProduk)
+void ascStok(barang Barang[], int jumlahBarang)
 {
-    for (int i = 0; i < jumlahProduk - 1; i++)
+    for (int i = 0; i < jumlahBarang - 1; i++)
     {
-        for (int j = 0; j < jumlahProduk - 1 - i; j++)
+        for (int j = 0; j < jumlahBarang - 1 - i; j++)
         {
-            if (Produk[j].stok > Produk[j + 1].stok)
+            if (Barang[j].stok > Barang[j + 1].stok)
             {
-                swapProduk(Produk[j], Produk[j + 1]);
+                swapBarang(Barang[j], Barang[j + 1]);
             }
         }
     }
-    tampilkanProduk(Produk, jumlahProduk);
+    tampilkanBarang(Barang, jumlahBarang);
 }
 
-void descStok(produk Produk[], int jumlahProduk)
+void descStok(barang Barang[], int jumlahBarang)
 {
-    for (int i = 0; i < jumlahProduk - 1; i++)
+    for (int i = 0; i < jumlahBarang - 1; i++)
     {
-        for (int j = 0; j < jumlahProduk - 1 - i; j++)
+        for (int j = 0; j < jumlahBarang - 1 - i; j++)
         {
-            if (Produk[j].stok < Produk[j + 1].stok)
+            if (Barang[j].stok < Barang[j + 1].stok)
             {
-                swapProduk(Produk[j], Produk[j + 1]);
+                swapBarang(Barang[j], Barang[j + 1]);
             }
         }
     }
-    tampilkanProduk(Produk, jumlahProduk);
+    tampilkanBarang(Barang, jumlahBarang);
 }
 
-void tampilkanProduk(produk Produk[], int jumlahProduk)
+void tampilkanBarang(barang Barang[], int jumlahBarang)
 {
     system("cls");
     cout << "====================================\n";
-    cout << "|           Daftar Produk          |\n";
+    cout << "|           Daftar Barang          |\n";
     cout << "====================================\n";
-    for (int j = 0; j < jumlahProduk; j++)
+    for (int j = 0; j < jumlahBarang; j++)
     {
-        cout << "Nama Produk : " << Produk[j].nama << endl;
-        cout << "Harga       : " << Produk[j].harga << endl;
-        cout << "Stok        : " << Produk[j].stok << endl;
+        cout << "Nama Barang : " << Barang[j].nama << endl;
+        cout << "Harga       : " << Barang[j].harga << endl;
+        cout << "Stok        : " << Barang[j].stok << endl;
         cout << "------------------------------------" << endl;
     }
 }
 
-void swapProduk(produk &a, produk &b)
+void swapBarang(barang &a, barang &b)
 {
-    produk temp = a;
+    barang temp = a;
     a = b;
     b = temp;
 }
 
-void cariProduk()
+void cariBarang()
 {
     system("cls");
-    string namaProduk;
+    string namaBarang;
     int index = -1;
     bool ada = false;
 
-    cout << "Nama produk : ";
-    cin >> namaProduk;
+    cout << "Nama barang : ";
+    cin >> namaBarang;
 
-    for (int j = 0; j < jumlahProduk; j++)
+    for (int j = 0; j < jumlahBarang; j++)
     {
-        if (Produk[j].nama == namaProduk)
+        if (Barang[j].nama == namaBarang)
         {
             ada = true;
             index = j;
@@ -306,18 +306,18 @@ void cariProduk()
     if (ada)
     {
         system("cls");
-        cout << "Nama Produk : " << Produk[index].nama << endl;
-        cout << "Harga       : " << Produk[index].harga << endl;
-        cout << "Stok        : " << Produk[index].stok << endl;
+        cout << "Nama Barang : " << Barang[index].nama << endl;
+        cout << "Harga       : " << Barang[index].harga << endl;
+        cout << "Stok        : " << Barang[index].stok << endl;
     }
     else
     {
         cout << "============================================\n";
-        cout << "----------Produk tidak ditemukan!-----------\n";
+        cout << "----------Barang tidak ditemukan!-----------\n";
     }
 }
 
-void menuPerbaruiProduk()
+void menuPerbaruiBarang()
 {
     system("cls");
     cout << "====================================\n";
@@ -333,14 +333,14 @@ void menuPerbaruiProduk()
 void perbaruiHarga()
 {
     system("cls");
-    string namaProduk;
+    string namaBarang;
     int j, index;
     bool ada = false;
-    cout << "Nama produk         : ";
-    cin >> namaProduk;
-    for (j = 0; j < jumlahProduk; j++)
+    cout << "Nama barang         : ";
+    cin >> namaBarang;
+    for (j = 0; j < jumlahBarang; j++)
     {
-        if (namaProduk == Produk[j].nama)
+        if (namaBarang == Barang[j].nama)
         {
             ada = true;
             index = j;
@@ -351,28 +351,28 @@ void perbaruiHarga()
         float hargaBaru;
         cout << "Masukkan harga baru : ";
         cin >> hargaBaru;
-        Produk[index].harga = hargaBaru;
+        Barang[index].harga = hargaBaru;
         cout << "============================================\n";
         cout << "---------Harga berhasil diperbarui!---------\n";
     }
     else
     {
         cout << "============================================\n";
-        cout << "----------Produk tidak ditemukan!-----------\n";
+        cout << "----------Barang tidak ditemukan!-----------\n";
     }
 }
 
 void perbaruiStok()
 {
     system("cls");
-    string namaProduk;
+    string namaBarang;
     int j, index;
     bool ada = false;
-    cout << "Nama produk        : ";
-    cin >> namaProduk;
-    for (j = 0; j < jumlahProduk; j++)
+    cout << "Nama barang        : ";
+    cin >> namaBarang;
+    for (j = 0; j < jumlahBarang; j++)
     {
-        if (namaProduk == Produk[j].nama)
+        if (namaBarang == Barang[j].nama)
         {
             ada = true;
             index = j;
@@ -383,20 +383,20 @@ void perbaruiStok()
         int stokBaru;
         cout << "Masukkan stok baru : ";
         cin >> stokBaru;
-        Produk[index].stok = stokBaru;
+        Barang[index].stok = stokBaru;
         cout << "============================================\n";
         cout << "---------Stok berhasil diperbarui!----------\n";
     }
     else
     {
         cout << "============================================\n";
-        cout << "----------Produk tidak ditemukan!-----------\n";
+        cout << "----------Barang tidak ditemukan!-----------\n";
     }
 }
 
-void perbaruiProduk()
+void perbaruiBarang()
 {
-    menuPerbaruiProduk();
+    menuPerbaruiBarang();
     switch (menuPerbarui)
     {
     case 1:
@@ -414,17 +414,17 @@ void perbaruiProduk()
     }
 }
 
-void hapusProduk()
+void hapusBarang()
 {
     system("cls");
-    string namaProduk;
+    string namaBarang;
     int j, index;
     bool ada = false;
-    cout << "Nama produk : ";
-    cin >> namaProduk;
-    for (j = 0; j < jumlahProduk; j++)
+    cout << "Nama barang : ";
+    cin >> namaBarang;
+    for (j = 0; j < jumlahBarang; j++)
     {
-        if (namaProduk == Produk[j].nama)
+        if (namaBarang == Barang[j].nama)
         {
             ada = true;
             index = j;
@@ -433,18 +433,18 @@ void hapusProduk()
     }
     if (ada)
     {
-        for (int k = index; k < jumlahProduk - 1; k++)
+        for (int k = index; k < jumlahBarang - 1; k++)
         {
-            Produk[k] = Produk[k + 1];
+            Barang[k] = Barang[k + 1];
         }
-        jumlahProduk--;
+        jumlahBarang--;
         cout << "============================================\n";
-        cout << "-------Data produk berhasil dihapus!--------\n";
+        cout << "-------Data barang berhasil dihapus!--------\n";
     }
     else
     {
         cout << "============================================\n";
-        cout << "----------Produk tidak ditemukan!-----------\n";
+        cout << "----------Barang tidak ditemukan!-----------\n";
     }
 }
 
